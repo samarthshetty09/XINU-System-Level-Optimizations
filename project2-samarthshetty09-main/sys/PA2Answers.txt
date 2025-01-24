@@ -1,0 +1,43 @@
+1) 
+Exponential Distribution Scheduler:
+Advantages:
+ - Here the scheduler selects the processes based on exponential distribution, because of this probabilistic nature of the scheduler 
+lower priority processes have a fair chance of being chosen from the ready queue which prevents them from prolonged starvation.
+
+- In systems where tasks can have mixed priorities (eg: Interactive systems), 
+the exponential scheduler can be have an advantage over other conventional schedulers as it allows for fair scheduling for 
+all tasks without a particular bias towards a higher priority tasks. 
+
+Disadvantages:
+- Because of the scheduling randomness it may showcase less predictable scheduling behavior, due to which
+high priority processes might be preempted by lower priority ones due to this probabilistic nature which can have an adverse impact on time sensitive tasks.
+
+Linux-like Scheduler:
+Advantages:
+- To ensure fairness for all the processes, the scheduler can dynamically modify each process's time quantum based on its priority and the quantum that remains from preceding epochs.
+- By assigning time quanta based on priority and dynamically adjusting them across epochs, Linux-like schedulers has good efficiency when it comes to utilizing CPU time across different tasks.
+
+Disadvantages:
+- Priority changes do not take effect immediately. If a process's priority is changed during an epoch, the change will only be applied in the next epoch, which may cause slight delays in response to priority adjustments.
+
+Round-Robin Scheduling
+Advantages:
+- Round robin scheduling has minimal overhead because it doesn’t require complex calculations like priority adjustments or probabilistic selection.
+- As every process gets an equal time slice in a round robin fashion, it ensures that no process is left behind. This is useful in systems where fairness is crucial.
+
+Disadvantages:
+- High Priority processes may not get the CPU time they need when required, which can lead to suboptimal performance for a series of critical tasks.
+- For tasks that have longer execution times, the constant context switching can lead to a significant overhead, because of this processes that need more time to complete may have to wait longer.
+
+
+2)
+Exponential Distribution Scheduler:
+- The NULL process is chosen when no other processes are available to be scheduled in the ready queue.
+
+Linux-like Scheduler:
+- The NULL process is chosen when all other processes have exhausted their time quantum in the current epoch i.e,
+if no processes have a positive goodness value. NULL process acts a fallback process between epochs when no other processes are ready.
+
+Round-Robin Scheduling: 
+- The NULL process runs whenever the ready queue is empty
+
